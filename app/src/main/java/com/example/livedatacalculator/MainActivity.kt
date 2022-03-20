@@ -35,8 +35,7 @@ class MainActivity : AppCompatActivity() {
         equalsButton.setOnClickListener{
             val lhs: Int = leftNumber.text.toString().toInt()
             val rhs: Int = rightNumber.text.toString().toInt()
-            val result: Int = lhs * rhs
-            viewModel.currentResult.value = result
+            viewModel.currentResult.value = lhs * rhs
         }
     }
 
