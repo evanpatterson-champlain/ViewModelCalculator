@@ -18,24 +18,23 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this).get(MultiplyViewModel::class.java)
 
-
         val resultText = findViewById<TextView>(R.id.tv_result)
 
-        viewModel.currentResult.observe(this, Observer {
-            resultText.text = it.toString()
+        viewModel.calcNum.observe(this, Observer {
+            resultText.text = viewModel.getResult().toString()
         })
 
-        calcResult()
+        setNumbers()
     }
 
-    private fun calcResult() {
+    private fun setNumbers() {
         val leftNumber = findViewById<EditText>(R.id.et_leftNumber)
         val rightNumber = findViewById<EditText>(R.id.et_rightNumber)
         val equalsButton = findViewById<ImageButton>(R.id.btn_equals)
         equalsButton.setOnClickListener{
-            val lhs: Int = leftNumber.text.toString().toInt()
-            val rhs: Int = rightNumber.text.toString().toInt()
-            viewModel.currentResult.value = lhs * rhs
+            viewModel.leftNumber = leftNumber.text.toString().toInt()
+            viewModel.rightNumber = rightNumber.text.toString().toInt()
+            viewModel.calcNum.value = viewModel.numCalculations++
         }
     }
 
